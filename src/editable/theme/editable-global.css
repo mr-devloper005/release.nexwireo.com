@@ -1,8 +1,12 @@
-/* Fully editable publication theme. Keep data and route logic outside this file. */
+/* Fully editable corporate newswire theme. Keep data and route logic outside this file. */
 :root {
   --editorial-red: var(--slot4-accent-fill);
   --editorial-ink: var(--slot4-page-text);
   --editorial-paper: var(--slot4-surface-bg);
+  --newsfile-teal: #38c3cc;
+  --newsfile-deep: #006d86;
+  --newsfile-navy: #08263b;
+  --newsfile-mist: #dff6fb;
 }
 
 html { scroll-behavior: smooth; }
@@ -10,7 +14,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--slot4-page-bg) !important;
   color: var(--slot4-page-text) !important;
-  background-image: none !important;
+  background-image: var(--slot4-body-gradient) !important;
   font-feature-settings: "kern", "liga", "clig", "calt";
 }
 
@@ -26,46 +30,36 @@ body {
 }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: #ebe7e1; }
-::-webkit-scrollbar-thumb { background: #171717; border: 2px solid #ebe7e1; }
+::-webkit-scrollbar-track { background: #e6f8fb; }
+::-webkit-scrollbar-thumb { background: #697d86; border: 2px solid #e6f8fb; border-radius: 999px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--editorial-red); }
 
-.editorial-brand,
-.editorial-serif {
-  font-family: Georgia, 'Times New Roman', serif;
+.editorial-brand {
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  letter-spacing: .08em;
 }
 
-.editorial-brand {
-  font-style: italic;
-  letter-spacing: -0.065em;
+.editorial-serif {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .editorial-rule { border-color: color-mix(in srgb, var(--editorial-ink) 22%, transparent); }
 
 .article-content {
-  color: #24211e;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(1.05rem, 1vw + .75rem, 1.25rem);
-  line-height: 1.82;
+  color: #0b1820;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1rem, .6vw + .82rem, 1.12rem);
+  line-height: 1.72;
 }
 
 .article-content > :first-child { margin-top: 0; }
 .article-content p { margin: 0 0 1.55em; }
-.article-content p:first-of-type::first-letter {
-  float: left;
-  margin: .08em .12em 0 0;
-  color: var(--editorial-red);
-  font-family: ui-sans-serif, system-ui, sans-serif;
-  font-size: 4.7em;
-  font-weight: 900;
-  line-height: .72;
-}
-
 .article-content h2,
 .article-content h3,
 .article-content h4 {
   margin: 1.8em 0 .65em;
-  color: #111;
+  color: var(--newsfile-deep);
   font-family: ui-sans-serif, system-ui, sans-serif;
   font-weight: 900;
   letter-spacing: -.045em;
@@ -74,14 +68,118 @@ body {
 .article-content h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
 .article-content h3 { font-size: clamp(1.45rem, 3vw, 2.15rem); }
 .article-content a { color: var(--editorial-red); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
-.article-content blockquote { margin: 2em 0; border-left: 7px solid var(--editorial-red); padding: .2em 0 .2em 1em; color: #111; font-size: 1.35em; font-weight: 700; line-height: 1.35; }
+.article-content blockquote { margin: 2em 0; border-left: 4px solid var(--editorial-red); padding: .2em 0 .2em 1em; color: var(--newsfile-deep); font-size: 1.35em; font-weight: 800; line-height: 1.35; }
 .article-content ul, .article-content ol { margin: 1.3em 0; padding-left: 1.4em; }
 .article-content li { margin: .5em 0; }
 .article-content img { width: 100%; margin: 2em 0; }
 
-input, textarea, select, button { border-radius: 0 !important; }
+input, textarea, select { border-radius: .75rem !important; }
+
+.tmx-logo-mark {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  color: #192a5a;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.tmx-logo-mark::after {
+  content: "";
+  width: 2.1rem;
+  height: 4rem;
+  margin-left: -.85rem;
+  border-right: .38rem solid #192a5a;
+  border-bottom: .18rem solid #192a5a;
+  transform: skew(-16deg) rotate(14deg);
+  border-radius: 0 0 60% 0;
+}
+
+.teal-geometry {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(120deg, rgba(255,255,255,.16) 0 1px, transparent 1px 100%) 0 0 / 104px 104px,
+    linear-gradient(135deg, #0a788f 0%, #1497a3 46%, #3bc2c9 100%);
+}
+
+.teal-geometry::before,
+.teal-geometry::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.teal-geometry::before {
+  inset: -18% -10% -12% auto;
+  width: min(42vw, 640px);
+  background:
+    linear-gradient(135deg, transparent 0 31%, rgba(216,247,251,.85) 31% 43%, transparent 43% 58%, rgba(5,84,111,.82) 58% 71%, transparent 71%),
+    linear-gradient(135deg, transparent 0 45%, rgba(255,255,255,.35) 45% 47%, transparent 47%);
+  clip-path: polygon(0 0, 100% 50%, 0 100%, 32% 50%);
+  animation: heroChevron 11s ease-in-out infinite alternate;
+}
+
+.teal-geometry::after {
+  inset: auto 0 0 0;
+  height: 42%;
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,.12));
+}
+
+.network-lines {
+  background-image:
+    radial-gradient(circle at 10% 30%, rgba(216,247,251,.48) 0 10px, transparent 11px),
+    radial-gradient(circle at 82% 38%, rgba(216,247,251,.46) 0 16px, transparent 17px),
+    radial-gradient(circle at 38% 70%, rgba(216,247,251,.35) 0 13px, transparent 14px),
+    linear-gradient(26deg, transparent 48%, rgba(216,247,251,.35) 49%, transparent 50%),
+    linear-gradient(142deg, transparent 48%, rgba(216,247,251,.30) 49%, transparent 50%);
+  background-size: 520px 360px, 620px 420px, 460px 360px, 170px 120px, 210px 160px;
+  animation: networkDrift 18s linear infinite;
+}
+
+.auto-rail {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  animation: autoRail 34s linear infinite;
+}
+
+.auto-rail:hover { animation-play-state: paused; }
+
+.float-card {
+  animation: floatCard 7s ease-in-out infinite;
+}
+
+@keyframes heroChevron {
+  from { transform: translateX(0) scale(1); opacity: .82; }
+  to { transform: translateX(-34px) scale(1.04); opacity: 1; }
+}
+
+@keyframes networkDrift {
+  from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0; }
+  to { background-position: 520px 0, -620px 0, 460px 0, 170px 0, -210px 0; }
+}
+
+@keyframes autoRail {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .teal-geometry::before,
+  .network-lines,
+  .auto-rail,
+  .float-card {
+    animation: none !important;
+  }
+}
 
 @media (max-width: 640px) {
   .article-content { font-size: 1.05rem; line-height: 1.72; }
-  .article-content p:first-of-type::first-letter { font-size: 3.9em; }
 }
